@@ -1,21 +1,18 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ioffeivan.android.application)
+    alias(libs.plugins.ioffeivan.compose)
+    alias(libs.plugins.ioffeivan.hilt)
 }
 
 android {
     namespace = "com.ioffeivan.mobilelibrary"
-    compileSdk {
-        version = release(36)
-    }
 
     defaultConfig {
         applicationId = "com.ioffeivan.mobilelibrary"
-        minSdk = 26
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+
+        val mobileLibraryVersion = libs.versions.mobileLibraryVersion.get()
+        versionCode = generateVersionCode(mobileLibraryVersion)
+        versionName = mobileLibraryVersion
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,31 +22,26 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-    buildFeatures {
-        compose = true
     }
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
+}
 
-    debugImplementation(libs.androidx.compose.ui.tooling)
+fun generateVersionCode(version: String): Int {
+    val versionRegex = Regex("""^(\d+)\.(\d+)\.(\d+)$""")
+    val match =
+        versionRegex.matchEntire(version)
+            ?: throw IllegalArgumentException("Invalid version format: $version. Expected X.Y.Z")
+
+    val (major, minor, patch) = match.destructured.toList().map { it.toInt() }
+
+    require(minor <= 99) { "Minor version must be <= 99" }
+    require(patch <= 99) { "Patch version must be <= 99" }
+
+    return major * 10_000 + minor * 100 + patch
 }
