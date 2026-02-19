@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.ioffeivan.android.application)
     alias(libs.plugins.ioffeivan.compose)
+    alias(libs.plugins.ioffeivan.hilt)
 }
 
 android {

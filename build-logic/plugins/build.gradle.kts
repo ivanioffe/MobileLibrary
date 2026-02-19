@@ -41,6 +41,10 @@ gradlePlugin {
             id = libs.plugins.ioffeivan.compose.get().pluginId
             implementationClass = "ComposeConventionPlugin"
         }
+        register("hilt") {
+            id = libs.plugins.ioffeivan.hilt.get().pluginId
+            implementationClass = "HiltConventionPlugin"
+        }
         register("jvmLibrary") {
             id = libs.plugins.ioffeivan.jvm.library.get().pluginId
             implementationClass = "JvmLibraryConventionPlugin"
