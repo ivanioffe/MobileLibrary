@@ -20,6 +20,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 dependencies {
                     "implementation"(libs.findLibrary("androidx-activity-compose").get())
                     "implementation"(libs.findLibrary("androidx-lifecycle-runtime-ktx").get())
+
+                    "androidTestImplementation"(libs.findLibrary("androidx-test-runner").get())
                 }
             }
         }
