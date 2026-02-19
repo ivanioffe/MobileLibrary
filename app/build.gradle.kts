@@ -8,8 +8,10 @@ android {
 
     defaultConfig {
         applicationId = "com.ioffeivan.mobilelibrary"
-        versionCode = 1
-        versionName = "1.0"
+
+        val mobileLibraryVersion = libs.versions.mobileLibraryVersion.get()
+        versionCode = generateVersionCode(mobileLibraryVersion)
+        versionName = mobileLibraryVersion
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -27,4 +29,18 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+}
+
+fun generateVersionCode(version: String): Int {
+    val versionRegex = Regex("""^(\d+)\.(\d+)\.(\d+)$""")
+    val match =
+        versionRegex.matchEntire(version)
+            ?: throw IllegalArgumentException("Invalid version format: $version. Expected X.Y.Z")
+
+    val (major, minor, patch) = match.destructured.toList().map { it.toInt() }
+
+    require(minor <= 99) { "Minor version must be <= 99" }
+    require(patch <= 99) { "Patch version must be <= 99" }
+
+    return major * 10_000 + minor * 100 + patch
 }
