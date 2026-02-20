@@ -8,6 +8,12 @@ plugins {
     alias(libs.plugins.ktlint) apply false
 }
 
+allprojects {
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
+}
+
 subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
 }
