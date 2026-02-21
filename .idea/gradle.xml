@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/plugins" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/datastore-auth" />
             <option value="$PROJECT_DIR$/core/datastore-user" />
           </set>
         </option>
