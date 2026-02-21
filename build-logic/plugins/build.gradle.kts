@@ -41,6 +41,10 @@ gradlePlugin {
             id = libs.plugins.ioffeivan.compose.get().pluginId
             implementationClass = "ComposeConventionPlugin"
         }
+        register("datastore") {
+            id = libs.plugins.ioffeivan.datastore.get().pluginId
+            implementationClass = "DataStoreConventionPlugin"
+        }
         register("hilt") {
             id = libs.plugins.ioffeivan.hilt.get().pluginId
             implementationClass = "HiltConventionPlugin"

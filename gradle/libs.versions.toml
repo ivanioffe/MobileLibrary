@@ -70,5 +70,6 @@ ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 ioffeivan-android-application = { id = "ioffeivan.android.application" }
 ioffeivan-android-library = { id = "ioffeivan.android.library" }
 ioffeivan-compose = { id = "ioffeivan.compose" }
+ioffeivan-datastore = { id = "ioffeivan.datastore" }
 ioffeivan-hilt = { id = "ioffeivan.hilt" }
 ioffeivan-jvm-library = { id = "ioffeivan.jvm.library" }
