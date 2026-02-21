@@ -19,3 +19,7 @@ android {
         }
     }
 }
+
+dependencies {
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+}
