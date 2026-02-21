@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.ioffeivan.android.library)
     alias(libs.plugins.ioffeivan.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -22,4 +23,11 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.kotlinx.serialization.json)
+
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.truth)
 }
