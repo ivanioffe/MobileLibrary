@@ -28,6 +28,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/datastore-auth" />
             <option value="$PROJECT_DIR$/core/datastore-user" />
+            <option value="$PROJECT_DIR$/core/presentation" />
           </set>
         </option>
       </GradleProjectSettings>
