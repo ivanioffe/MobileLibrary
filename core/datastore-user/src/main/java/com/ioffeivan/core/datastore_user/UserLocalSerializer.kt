@@ -17,7 +17,7 @@ internal object UserLocalSerializer : Serializer<UserLocal> {
                 input.readBytes().decodeToString(),
             )
         } catch (e: SerializationException) {
-            throw CorruptionException("Unable to read Settings", e)
+            throw CorruptionException("Unable to read UserLocal", e)
         }
     }
 
