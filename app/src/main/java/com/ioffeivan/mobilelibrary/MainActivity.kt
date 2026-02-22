@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.ioffeivan.mobilelibrary.ui.theme.MobileLibraryTheme
+import com.ioffeivan.core.designsystem.theme.MobileLibraryTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
