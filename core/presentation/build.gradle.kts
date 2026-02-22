@@ -18,8 +18,15 @@ android {
             )
         }
     }
+    testFixtures {
+        enable = true
+    }
 }
 
 dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    testFixturesImplementation(libs.kotlinx.coroutines.test)
+    testFixturesImplementation(libs.test.junit5.api)
+    testFixturesImplementation(platform(libs.test.junit5.bom))
 }
