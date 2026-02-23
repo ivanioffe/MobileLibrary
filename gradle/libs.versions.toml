@@ -66,6 +66,7 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 
 android-gradleApiPlugin = { group = "com.android.tools.build", name = "gradle-api", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+roborazzi-gradlePlugin = { group = "io.github.takahirom.roborazzi", name = "roborazzi-gradle-plugin", version.ref = "roborazzi" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -84,3 +85,4 @@ ioffeivan-compose = { id = "ioffeivan.compose" }
 ioffeivan-datastore = { id = "ioffeivan.datastore" }
 ioffeivan-hilt = { id = "ioffeivan.hilt" }
 ioffeivan-jvm-library = { id = "ioffeivan.jvm.library" }
+ioffeivan-screenshotTesting = { id = "ioffeivan.screenshotTesting" }
