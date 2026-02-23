@@ -8,6 +8,7 @@ class DataStoreConventionPlugin : Plugin<Project> {
         with(project) {
             pluginManager.apply("ioffeivan.android.library")
             pluginManager.apply("ioffeivan.hilt")
+            pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
 
             dependencies {
                 "implementation"(libs.findLibrary("androidx.datastore.preferences").get())

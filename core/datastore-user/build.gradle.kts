@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.ioffeivan.datastore)
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
