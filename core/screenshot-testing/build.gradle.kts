@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.ioffeivan.android.library)
-    alias(libs.plugins.ioffeivan.compose)
-    alias(libs.plugins.ioffeivan.screenshotTesting)
+    alias(libs.plugins.roborazzi)
 }
 
 android {
-    namespace = "com.ioffeivan.core.designsystem"
+    namespace = "com.ioffeivan.core.screenshot_testing"
 
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
@@ -20,4 +19,14 @@ android {
             )
         }
     }
+    testFixtures {
+        enable = true
+    }
+}
+
+dependencies {
+    testFixturesImplementation(libs.composable.preview.scanner)
+    testFixturesImplementation(libs.junit)
+    testFixturesImplementation(libs.robolectric)
+    testFixturesImplementation(libs.roborazzi.previewScanner)
 }

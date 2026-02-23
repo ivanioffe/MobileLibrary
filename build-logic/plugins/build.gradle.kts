@@ -18,6 +18,7 @@ kotlin {
 dependencies {
     compileOnly(libs.android.gradleApiPlugin)
     compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.roborazzi.gradlePlugin)
 }
 
 tasks {
@@ -52,6 +53,10 @@ gradlePlugin {
         register("jvmLibrary") {
             id = libs.plugins.ioffeivan.jvm.library.get().pluginId
             implementationClass = "JvmLibraryConventionPlugin"
+        }
+        register("screenshotTesting") {
+            id = libs.plugins.ioffeivan.screenshotTesting.get().pluginId
+            implementationClass = "ScreenshotTestingConventionPlugin"
         }
     }
 }
