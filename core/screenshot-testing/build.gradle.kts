@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.ioffeivan.android.library)
+    alias(libs.plugins.roborazzi)
 }
 
 android {
@@ -18,4 +19,14 @@ android {
             )
         }
     }
+    testFixtures {
+        enable = true
+    }
+}
+
+dependencies {
+    testFixturesImplementation(libs.composable.preview.scanner)
+    testFixturesImplementation(libs.junit)
+    testFixturesImplementation(libs.robolectric)
+    testFixturesImplementation(libs.roborazzi.previewScanner)
 }
