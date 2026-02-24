@@ -19,3 +19,8 @@ android {
         }
     }
 }
+
+dependencies {
+    implementation(projects.core.datastoreUser)
+    implementation(projects.core.model)
+}
