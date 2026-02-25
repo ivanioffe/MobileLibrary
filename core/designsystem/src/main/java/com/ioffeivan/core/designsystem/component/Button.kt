@@ -1,5 +1,6 @@
 package com.ioffeivan.core.designsystem.component
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -12,6 +13,29 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ioffeivan.core.designsystem.preview.PreviewContainer
+
+@Composable
+fun PrimaryButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    content: @Composable RowScope.() -> Unit,
+) {
+    Button(
+        onClick = onClick,
+        enabled = enabled,
+        shape = CircleShape,
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+            ),
+        modifier =
+            modifier
+                .height(48.dp),
+        content = content,
+    )
+}
 
 @Composable
 fun PrimaryButton(
