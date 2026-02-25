@@ -45,4 +45,6 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.google.android.identity.googleid)
     implementation(libs.play.services.auth)
+
+    androidTestImplementation(libs.androidx.test.runner)
 }
