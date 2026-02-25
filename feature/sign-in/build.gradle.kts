@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.ioffeivan.android.library)
+    alias(libs.plugins.ioffeivan.hilt)
 }
 
 android {
@@ -18,4 +19,8 @@ android {
             )
         }
     }
+}
+
+dependencies {
+    implementation(projects.core.model)
 }
