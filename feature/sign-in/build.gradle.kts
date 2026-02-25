@@ -27,6 +27,10 @@ android {
     }
 }
 
+secrets {
+    defaultPropertiesFileName = "secrets.defaults.properties"
+}
+
 dependencies {
     implementation(projects.core.data)
     implementation(projects.core.datastoreAuth)
