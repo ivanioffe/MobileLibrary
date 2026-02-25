@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.ioffeivan.android.library)
+    alias(libs.plugins.ioffeivan.compose)
     alias(libs.plugins.ioffeivan.hilt)
+    alias(libs.plugins.ioffeivan.screenshotTesting)
     alias(libs.plugins.secrets)
 }
 
@@ -29,10 +31,14 @@ dependencies {
     implementation(projects.core.data)
     implementation(projects.core.datastoreAuth)
     implementation(projects.core.datastoreUser)
+    implementation(projects.core.designsystem)
     implementation(projects.core.model)
+    implementation(projects.core.ui)
 
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.google.android.identity.googleid)
     implementation(libs.play.services.auth)
 }
