@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.ioffeivan.android.application)
     alias(libs.plugins.ioffeivan.compose)
     alias(libs.plugins.ioffeivan.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -30,8 +31,12 @@ android {
 
 dependencies {
     implementation(projects.core.designsystem)
+    implementation(projects.core.ui)
+
+    implementation(projects.feature.signIn)
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.navigation.compose)
 }
 
 fun generateVersionCode(version: String): Int {
