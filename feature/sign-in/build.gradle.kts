@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.ioffeivan.compose)
     alias(libs.plugins.ioffeivan.hilt)
     alias(libs.plugins.ioffeivan.screenshotTesting)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.secrets)
 }
 
