@@ -1,5 +1,5 @@
 [versions]
-mobileLibraryVersion = "1.0.0"
+mobileLibraryVersion = "0.1.0"
 
 activityCompose = "1.12.4"
 androidxCredentials = "1.5.0"
