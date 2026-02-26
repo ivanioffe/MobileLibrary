@@ -22,6 +22,11 @@ jobs:
           gradle-version: wrapper
           cache-read-only: false
 
+      - name: Create secrets.properties
+        run: |
+          echo "GOOGLE_SERVER_CLIENT_ID=${{ secrets.GOOGLE_SERVER_CLIENT_ID }}" >> secrets.properties
+          echo "GOOGLE_BOOKS_SCOPE=${{ secrets.GOOGLE_BOOKS_SCOPE }}" >> secrets.properties
+
       - name: Build Release APK
         run: ./gradlew assembleRelease
 
@@ -40,6 +45,9 @@ jobs:
             --ks-key-alias ${{ secrets.KEY_ALIAS }} \
             --ks-pass pass:${{ secrets.KEYSTORE_PASSWORD }} \
             --key-pass pass:${{ secrets.KEY_PASSWORD }} \
+            --v1-signing-enabled true \
+            --v2-signing-enabled true \
+            --v3-signing-enabled true \
             --out mobile-library.apk \
             app/build/outputs/apk/release/app-release-unsigned.apk
 
