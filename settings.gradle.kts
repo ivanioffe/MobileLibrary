@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -20,5 +21,17 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "MobileLibrary"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
- 
+
+include(":core:data")
+include(":core:datastore-auth")
+include(":core:datastore-user")
+include(":core:designsystem")
+include(":core:model")
+include(":core:presentation")
+include(":core:screenshot-testing")
+include(":core:ui")
+
+include(":feature:sign-in")

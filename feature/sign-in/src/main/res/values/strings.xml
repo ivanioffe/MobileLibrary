@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_in_google_button">Войти через Google</string>
+    <string name="sign_in_error_general">Ошибка входа</string>
+    <string name="sign_in_error_books_access">Ошибка получения доступа к книгам</string>
+</resources>
