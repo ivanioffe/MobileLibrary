@@ -25,6 +25,7 @@ rootProject.name = "MobileLibrary"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 
+include(":core:common")
 include(":core:data")
 include(":core:datastore-auth")
 include(":core:datastore-user")
