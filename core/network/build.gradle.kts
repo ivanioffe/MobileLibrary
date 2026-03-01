@@ -38,4 +38,5 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.play.services.auth)
     implementation(libs.retrofit.core)
+    implementation(libs.retrofit.kotlin.serialization)
 }
