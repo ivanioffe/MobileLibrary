@@ -27,6 +27,7 @@ include(":app")
 
 include(":core:common")
 include(":core:data")
+include(":core:database")
 include(":core:datastore-auth")
 include(":core:datastore-user")
 include(":core:designsystem")
