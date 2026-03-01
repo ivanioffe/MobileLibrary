@@ -33,6 +33,7 @@ secrets {
 }
 
 dependencies {
+    implementation(projects.core.common)
     implementation(projects.core.datastoreAuth)
 
     implementation(libs.kotlinx.serialization.json)
