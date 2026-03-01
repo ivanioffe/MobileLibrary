@@ -24,8 +24,9 @@ jobs:
 
       - name: Create secrets.properties
         run: |
-          echo "GOOGLE_SERVER_CLIENT_ID=${{ secrets.GOOGLE_SERVER_CLIENT_ID }}" >> secrets.properties
+          echo "BACKEND_BASE_URL=${{ secrets.BACKEND_BASE_URL }}" >> secrets.properties
           echo "GOOGLE_BOOKS_SCOPE=${{ secrets.GOOGLE_BOOKS_SCOPE }}" >> secrets.properties
+          echo "GOOGLE_SERVER_CLIENT_ID=${{ secrets.GOOGLE_SERVER_CLIENT_ID }}" >> secrets.properties
 
       - name: Build Release APK
         run: ./gradlew assembleRelease
