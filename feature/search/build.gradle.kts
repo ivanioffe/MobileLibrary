@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.ioffeivan.android.library)
+    alias(libs.plugins.ioffeivan.hilt)
 }
 
 android {
@@ -22,7 +23,21 @@ android {
 
 dependencies {
     implementation(projects.core.common)
+    implementation(projects.core.domain)
     implementation(projects.core.model)
 
     implementation(libs.kotlinx.coroutines.core)
+
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(platform(libs.test.junit5.bom))
+    testImplementation(libs.test.junit5.api)
+    testImplementation(libs.test.junit5.params)
+    testImplementation(libs.truth)
+    testImplementation(libs.turbine)
+
+    testRuntimeOnly(libs.test.junit.platform.launcher)
+    testRuntimeOnly(libs.test.junit5.engine)
+
+    androidTestImplementation(libs.androidx.test.runner)
 }
