@@ -6,8 +6,9 @@ import com.ioffeivan.core.domain.base.UseCase
 import com.ioffeivan.feature.search.domain.repository.RecentSearchRepository
 import com.ioffeivan.feature.search.domain.usecase.utils.Query
 import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Inject
 
-internal class DeleteRecentSearchUseCase(
+internal class DeleteRecentSearchUseCase @Inject constructor(
     private val recentSearchRepository: RecentSearchRepository,
     @IODispatcher dispatcher: CoroutineDispatcher,
 ) : UseCase<Query, Unit, Nothing>(dispatcher) {

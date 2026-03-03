@@ -45,7 +45,7 @@ class SearchUseCaseTest {
             val result = searchUseCase(searchParams)
 
             assertThat(result)
-                .isEqualTo(Result.Success(SearchUseCase.SearchSuccess.SearchData(books)))
+                .isEqualTo(Result.Success(SearchUseCase.SearchSuccess.BooksData(books)))
             coVerify(exactly = 1) { searchRepository.search(searchParams) }
         }
 
@@ -58,7 +58,7 @@ class SearchUseCaseTest {
             val result = searchUseCase(searchParams)
 
             assertThat(result)
-                .isEqualTo(Result.BusinessRuleError(SearchUseCase.SearchErrors.NoSearchData))
+                .isEqualTo(Result.BusinessRuleError(SearchUseCase.SearchErrors.NoBooksFound))
             coVerify(exactly = 1) { searchRepository.search(searchParams) }
         }
 

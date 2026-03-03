@@ -5,8 +5,9 @@ import com.ioffeivan.core.domain.base.Result
 import com.ioffeivan.core.domain.base.UseCase
 import com.ioffeivan.feature.search.domain.repository.RecentSearchRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Inject
 
-internal class ClearRecentSearchesUseCase(
+internal class ClearRecentSearchesUseCase @Inject constructor(
     private val recentSearchRepository: RecentSearchRepository,
     @IODispatcher dispatcher: CoroutineDispatcher,
 ) : UseCase<Unit, Unit, Nothing>(dispatcher) {

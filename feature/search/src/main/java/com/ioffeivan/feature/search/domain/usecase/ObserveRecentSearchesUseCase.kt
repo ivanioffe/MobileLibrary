@@ -7,26 +7,27 @@ import com.ioffeivan.feature.search.domain.repository.RecentSearchRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 private typealias Limit = Int
 
 private const val DEFAULT_LIMIT = 30
 
-internal class ObserveRecentSearchesUseCase(
+internal class ObserveRecentSearchesUseCase @Inject constructor(
     private val recentSearchRepository: RecentSearchRepository,
     @IODispatcher dispatcher: CoroutineDispatcher,
-) : FlowUseCase<Limit, ObserveRecentSearchesUseCase.GetRecentSearchesSuccess, Nothing>(dispatcher) {
-    sealed class GetRecentSearchesSuccess {
-        data class RecentSearches(val items: List<String>) : GetRecentSearchesSuccess()
+) : FlowUseCase<Limit, ObserveRecentSearchesUseCase.ObserveRecentSearchesSuccess, Nothing>(dispatcher) {
+    sealed class ObserveRecentSearchesSuccess {
+        data class RecentSearches(val items: List<String>) : ObserveRecentSearchesSuccess()
     }
 
-    operator fun invoke(): Flow<Result<GetRecentSearchesSuccess, Nothing>> =
+    operator fun invoke(): Flow<Result<ObserveRecentSearchesSuccess, Nothing>> =
         invoke(DEFAULT_LIMIT)
 
-    override fun execute(parameters: Limit): Flow<Result<GetRecentSearchesSuccess, Nothing>> {
+    override fun execute(parameters: Limit): Flow<Result<ObserveRecentSearchesSuccess, Nothing>> {
         return recentSearchRepository.observeRecentSearches(parameters)
             .map { recentSearches ->
-                Result.Success(GetRecentSearchesSuccess.RecentSearches(recentSearches))
+                Result.Success(ObserveRecentSearchesSuccess.RecentSearches(recentSearches))
             }
     }
 }

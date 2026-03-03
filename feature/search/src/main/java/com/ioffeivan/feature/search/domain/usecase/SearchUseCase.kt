@@ -8,17 +8,18 @@ import com.ioffeivan.core.model.Books
 import com.ioffeivan.feature.search.domain.model.SearchParams
 import com.ioffeivan.feature.search.domain.repository.SearchRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Inject
 
-internal class SearchUseCase(
+internal class SearchUseCase @Inject constructor(
     private val searchRepository: SearchRepository,
     @IODispatcher dispatcher: CoroutineDispatcher,
 ) : UseCase<SearchParams, SearchUseCase.SearchSuccess, SearchUseCase.SearchErrors>(dispatcher) {
     sealed class SearchSuccess {
-        data class SearchData(val books: Books) : SearchSuccess()
+        data class BooksData(val books: Books) : SearchSuccess()
     }
 
     sealed class SearchErrors {
-        data object NoSearchData : SearchErrors()
+        data object NoBooksFound : SearchErrors()
     }
 
     override suspend fun execute(parameters: SearchParams): Result<SearchSuccess, SearchErrors> {
@@ -29,9 +30,9 @@ internal class SearchUseCase(
                 val books = result.data
 
                 if (books.items.isNotEmpty()) {
-                    Result.Success(SearchSuccess.SearchData(books))
+                    Result.Success(SearchSuccess.BooksData(books))
                 } else {
-                    Result.BusinessRuleError(SearchErrors.NoSearchData)
+                    Result.BusinessRuleError(SearchErrors.NoBooksFound)
                 }
             }
 
