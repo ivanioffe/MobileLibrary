@@ -25,11 +25,13 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.domain)
     implementation(projects.core.model)
+    implementation(projects.core.network)
 
     implementation(libs.kotlinx.coroutines.core)
 
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
+    testImplementation(libs.mockwebserver)
     testImplementation(platform(libs.test.junit5.bom))
     testImplementation(libs.test.junit5.api)
     testImplementation(libs.test.junit5.params)
