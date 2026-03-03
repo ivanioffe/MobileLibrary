@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test
 
 class GetRecentSearchesUseCaseTest {
     private lateinit var recentSearchRepository: RecentSearchRepository
-    private lateinit var useCase: GetRecentSearchesUseCase
+    private lateinit var useCase: ObserveRecentSearchesUseCase
 
     private val testDispatcher = UnconfinedTestDispatcher()
     private val limit = 5
@@ -24,7 +24,7 @@ class GetRecentSearchesUseCaseTest {
     @BeforeEach
     fun setUp() {
         recentSearchRepository = mockk()
-        useCase = GetRecentSearchesUseCase(recentSearchRepository, testDispatcher)
+        useCase = ObserveRecentSearchesUseCase(recentSearchRepository, testDispatcher)
     }
 
     @AfterEach
@@ -48,7 +48,7 @@ class GetRecentSearchesUseCaseTest {
                 assertThat(result)
                     .isEqualTo(
                         Result.Success(
-                            GetRecentSearchesUseCase.GetRecentSearchesSuccess.RecentSearches(
+                            ObserveRecentSearchesUseCase.GetRecentSearchesSuccess.RecentSearches(
                                 recentSearches,
                             ),
                         ),

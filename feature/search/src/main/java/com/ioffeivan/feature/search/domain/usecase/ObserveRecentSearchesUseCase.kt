@@ -12,10 +12,10 @@ private typealias Limit = Int
 
 private const val DEFAULT_LIMIT = 30
 
-internal class GetRecentSearchesUseCase(
+internal class ObserveRecentSearchesUseCase(
     private val recentSearchRepository: RecentSearchRepository,
     @IODispatcher dispatcher: CoroutineDispatcher,
-) : FlowUseCase<Limit, GetRecentSearchesUseCase.GetRecentSearchesSuccess, Nothing>(dispatcher) {
+) : FlowUseCase<Limit, ObserveRecentSearchesUseCase.GetRecentSearchesSuccess, Nothing>(dispatcher) {
     sealed class GetRecentSearchesSuccess {
         data class RecentSearches(val items: List<String>) : GetRecentSearchesSuccess()
     }
