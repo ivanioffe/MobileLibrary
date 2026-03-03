@@ -3,7 +3,6 @@ package com.ioffeivan.feature.search.domain.usecase
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import com.ioffeivan.core.domain.base.Result
-import com.ioffeivan.feature.search.domain.model.SearchRecent
 import com.ioffeivan.feature.search.domain.repository.RecentSearchRepository
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
@@ -36,7 +35,7 @@ class GetRecentSearchesUseCaseTest {
     @Test
     fun whenRepositoryReturnsRecentSearches_shouldReturnSuccessFlow() =
         runTest {
-            val recentSearches = listOf(SearchRecent("query1"), SearchRecent("query2"))
+            val recentSearches = listOf("query1", "query2")
             coEvery {
                 recentSearchRepository.observeRecentSearches(limit)
             } returns flowOf(recentSearches)

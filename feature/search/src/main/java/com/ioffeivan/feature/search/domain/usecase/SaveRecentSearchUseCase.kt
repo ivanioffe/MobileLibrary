@@ -7,12 +7,12 @@ import com.ioffeivan.feature.search.domain.repository.RecentSearchRepository
 import com.ioffeivan.feature.search.domain.usecase.utils.Query
 import kotlinx.coroutines.CoroutineDispatcher
 
-internal class RemoveRecentSearchUseCase(
+internal class SaveRecentSearchUseCase(
     private val recentSearchRepository: RecentSearchRepository,
     @IODispatcher dispatcher: CoroutineDispatcher,
 ) : UseCase<Query, Unit, Nothing>(dispatcher) {
     override suspend fun execute(parameters: Query): Result<Unit, Nothing> {
-        recentSearchRepository.removeRecentSearch(parameters)
+        recentSearchRepository.saveRecentSearch(parameters)
 
         return Result.Success(Unit)
     }

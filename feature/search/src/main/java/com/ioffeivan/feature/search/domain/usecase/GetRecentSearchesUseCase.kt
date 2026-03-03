@@ -3,7 +3,6 @@ package com.ioffeivan.feature.search.domain.usecase
 import com.ioffeivan.core.common.coroutine.IODispatcher
 import com.ioffeivan.core.domain.base.FlowUseCase
 import com.ioffeivan.core.domain.base.Result
-import com.ioffeivan.feature.search.domain.model.SearchRecent
 import com.ioffeivan.feature.search.domain.repository.RecentSearchRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +17,7 @@ internal class GetRecentSearchesUseCase(
     @IODispatcher dispatcher: CoroutineDispatcher,
 ) : FlowUseCase<Limit, GetRecentSearchesUseCase.GetRecentSearchesSuccess, Nothing>(dispatcher) {
     sealed class GetRecentSearchesSuccess {
-        data class RecentSearches(val items: List<SearchRecent>) : GetRecentSearchesSuccess()
+        data class RecentSearches(val items: List<String>) : GetRecentSearchesSuccess()
     }
 
     operator fun invoke(): Flow<Result<GetRecentSearchesSuccess, Nothing>> =

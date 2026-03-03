@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test
 
 class AddRecentSearchUseCaseTest {
     private lateinit var recentSearchRepository: RecentSearchRepository
-    private lateinit var useCase: AddRecentSearchUseCase
+    private lateinit var useCase: SaveRecentSearchUseCase
 
     private val testDispatcher = UnconfinedTestDispatcher()
     private val query = "query"
@@ -25,7 +25,7 @@ class AddRecentSearchUseCaseTest {
     @BeforeEach
     fun setUp() {
         recentSearchRepository = mockk()
-        useCase = AddRecentSearchUseCase(recentSearchRepository, testDispatcher)
+        useCase = SaveRecentSearchUseCase(recentSearchRepository, testDispatcher)
     }
 
     @AfterEach
@@ -36,23 +36,23 @@ class AddRecentSearchUseCaseTest {
     @Test
     fun whenCalled_shouldReturnSuccessUnit() =
         runTest {
-            coEvery { recentSearchRepository.addRecentSearch(query) } returns Unit
+            coEvery { recentSearchRepository.saveRecentSearch(query) } returns Unit
 
             val result = useCase(query)
 
             assertThat(result).isEqualTo(Result.Success(Unit))
-            coVerify(exactly = 1) { recentSearchRepository.addRecentSearch(query) }
+            coVerify(exactly = 1) { recentSearchRepository.saveRecentSearch(query) }
         }
 
     @Test
     fun whenRepositoryThrowsException_shouldReturnError() =
         runTest {
-            coEvery { recentSearchRepository.addRecentSearch(query) } throws RuntimeException()
+            coEvery { recentSearchRepository.saveRecentSearch(query) } throws RuntimeException()
 
             val result = useCase(query)
 
             assertThat(result)
                 .isEqualTo(Result.Error(AppError.CommonError(CommonStatusCode.Unknown)))
-            coVerify(exactly = 1) { recentSearchRepository.addRecentSearch(query) }
+            coVerify(exactly = 1) { recentSearchRepository.saveRecentSearch(query) }
         }
 }
