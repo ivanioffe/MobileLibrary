@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.ioffeivan.core.ui.ShowSnackbar
+import com.ioffeivan.feature.search.presentation.search_results.navigation.navigateToSearchResults
 
 @Composable
 fun AppNavGraph(
@@ -22,6 +23,11 @@ fun AppNavGraph(
             onShowSnackbar = onShowSnackbar,
         )
 
-        authorized()
+        authorized(
+            onNavigateBack = navController::popBackStack,
+            onNavigateToSearchResults = {
+                navController.navigateToSearchResults(query = it)
+            },
+        )
     }
 }

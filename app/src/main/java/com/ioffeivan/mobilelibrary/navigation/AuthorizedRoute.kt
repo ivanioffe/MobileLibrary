@@ -8,6 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.ioffeivan.feature.search.presentation.navigation.SearchRoute
+import com.ioffeivan.feature.search.presentation.navigation.search
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -16,9 +18,12 @@ data object AuthorizedRoute
 @Serializable
 data object HomeRoute
 
-fun NavGraphBuilder.authorized() {
+fun NavGraphBuilder.authorized(
+    onNavigateBack: () -> Unit,
+    onNavigateToSearchResults: (String) -> Unit,
+) {
     navigation<AuthorizedRoute>(
-        startDestination = HomeRoute,
+        startDestination = SearchRoute,
     ) {
         composable<HomeRoute> {
             Box(
@@ -30,5 +35,11 @@ fun NavGraphBuilder.authorized() {
                 Text(text = "Home screen")
             }
         }
+
+        search(
+            onNavigateBack = onNavigateBack,
+            onNavigateToSearchResults = onNavigateToSearchResults,
+            onNavigateToBookDetails = {},
+        )
     }
 }

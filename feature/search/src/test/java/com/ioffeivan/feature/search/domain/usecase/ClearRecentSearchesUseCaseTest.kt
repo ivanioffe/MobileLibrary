@@ -46,12 +46,13 @@ class ClearRecentSearchesUseCaseTest {
     @Test
     fun whenRepositoryThrowsException_shouldReturnError() =
         runTest {
-            coEvery { recentSearchRepository.clearRecentSearches() } throws RuntimeException()
+            val exception = RuntimeException()
+            coEvery { recentSearchRepository.clearRecentSearches() } throws exception
 
             val result = useCase(Unit)
 
             assertThat(result)
-                .isEqualTo(Result.Error(AppError.CommonError(CommonStatusCode.Unknown)))
+                .isEqualTo(Result.Error(AppError.CommonError(CommonStatusCode.Unknown, exception)))
             coVerify(exactly = 1) { recentSearchRepository.clearRecentSearches() }
         }
 }

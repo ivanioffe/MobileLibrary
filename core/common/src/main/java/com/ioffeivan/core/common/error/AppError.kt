@@ -21,6 +21,7 @@ sealed class AppError {
      */
     data class CommonError(
         val statusCode: CommonStatusCode,
+        val originalException: Throwable,
     ) : AppError()
 }
 
@@ -36,5 +37,6 @@ fun Throwable.mapToCommonError(): AppError.CommonError {
 
     return AppError.CommonError(
         statusCode = statusCode,
+        originalException = this,
     )
 }

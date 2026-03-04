@@ -1,8 +1,8 @@
 package com.ioffeivan.core.network.call_adapter
 
 import com.ioffeivan.core.common.error.AppError
-import com.ioffeivan.core.common.error.mapToCommonError
 import com.ioffeivan.core.common.result.DataResult
+import com.ioffeivan.core.network.utils.mapToAppError
 import com.ioffeivan.core.network.utils.toDataResult
 import okhttp3.Request
 import okio.Timeout
@@ -63,6 +63,6 @@ private class ResultCall<T>(
     override fun cancel() = call.cancel()
 
     private fun createErrorDataResult(t: Throwable): DataResult.Error<AppError> {
-        return DataResult.Error(t.mapToCommonError())
+        return DataResult.Error(t.mapToAppError())
     }
 }

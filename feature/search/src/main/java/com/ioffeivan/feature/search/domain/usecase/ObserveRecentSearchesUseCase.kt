@@ -16,18 +16,18 @@ private const val DEFAULT_LIMIT = 30
 internal class ObserveRecentSearchesUseCase @Inject constructor(
     private val recentSearchRepository: RecentSearchRepository,
     @IODispatcher dispatcher: CoroutineDispatcher,
-) : FlowUseCase<Limit, ObserveRecentSearchesUseCase.ObserveRecentSearchesSuccess, Nothing>(dispatcher) {
-    sealed class ObserveRecentSearchesSuccess {
-        data class RecentSearches(val items: List<String>) : ObserveRecentSearchesSuccess()
+) : FlowUseCase<Limit, ObserveRecentSearchesUseCase.Success, Nothing>(dispatcher) {
+    sealed class Success {
+        data class RecentSearches(val items: List<String>) : Success()
     }
 
-    operator fun invoke(): Flow<Result<ObserveRecentSearchesSuccess, Nothing>> =
+    operator fun invoke(): Flow<Result<Success, Nothing>> =
         invoke(DEFAULT_LIMIT)
 
-    override fun execute(parameters: Limit): Flow<Result<ObserveRecentSearchesSuccess, Nothing>> {
+    override fun execute(parameters: Limit): Flow<Result<Success, Nothing>> {
         return recentSearchRepository.observeRecentSearches(parameters)
             .map { recentSearches ->
-                Result.Success(ObserveRecentSearchesSuccess.RecentSearches(recentSearches))
+                Result.Success(Success.RecentSearches(recentSearches))
             }
     }
 }

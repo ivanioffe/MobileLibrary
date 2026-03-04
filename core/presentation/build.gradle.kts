@@ -29,6 +29,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.common)
+
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     testFixturesImplementation(libs.kotlinx.coroutines.test)

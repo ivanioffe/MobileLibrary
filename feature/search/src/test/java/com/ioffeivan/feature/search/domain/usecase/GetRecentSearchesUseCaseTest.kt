@@ -48,7 +48,7 @@ class GetRecentSearchesUseCaseTest {
                 assertThat(result)
                     .isEqualTo(
                         Result.Success(
-                            ObserveRecentSearchesUseCase.ObserveRecentSearchesSuccess.RecentSearches(
+                            ObserveRecentSearchesUseCase.Success.RecentSearches(
                                 recentSearches,
                             ),
                         ),

@@ -47,12 +47,13 @@ class RemoveRecentSearchUseCaseTest {
     @Test
     fun whenRepositoryThrowsException_shouldReturnError() =
         runTest {
-            coEvery { recentSearchRepository.deleteRecentSearch(query) } throws RuntimeException()
+            val exception = RuntimeException()
+            coEvery { recentSearchRepository.deleteRecentSearch(query) } throws exception
 
             val result = useCase(query)
 
             assertThat(result)
-                .isEqualTo(Result.Error(AppError.CommonError(CommonStatusCode.Unknown)))
+                .isEqualTo(Result.Error(AppError.CommonError(CommonStatusCode.Unknown, exception)))
             coVerify(exactly = 1) { recentSearchRepository.deleteRecentSearch(query) }
         }
 }

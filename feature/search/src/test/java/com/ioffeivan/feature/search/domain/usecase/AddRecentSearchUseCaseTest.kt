@@ -47,12 +47,13 @@ class AddRecentSearchUseCaseTest {
     @Test
     fun whenRepositoryThrowsException_shouldReturnError() =
         runTest {
-            coEvery { recentSearchRepository.saveRecentSearch(query) } throws RuntimeException()
+            val exception = RuntimeException()
+            coEvery { recentSearchRepository.saveRecentSearch(query) } throws exception
 
             val result = useCase(query)
 
             assertThat(result)
-                .isEqualTo(Result.Error(AppError.CommonError(CommonStatusCode.Unknown)))
+                .isEqualTo(Result.Error(AppError.CommonError(CommonStatusCode.Unknown, exception)))
             coVerify(exactly = 1) { recentSearchRepository.saveRecentSearch(query) }
         }
 }

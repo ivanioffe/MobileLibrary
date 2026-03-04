@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_network_no_connection">Нет подключения к Интернету</string>
+    <string name="error_network_unknown">Неизвестная ошибка сети</string>
+
+    <string name="error_common_unknown">Неизвестная ошибка</string>
+</resources>

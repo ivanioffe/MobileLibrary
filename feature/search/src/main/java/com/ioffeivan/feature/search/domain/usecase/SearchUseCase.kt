@@ -13,16 +13,16 @@ import javax.inject.Inject
 internal class SearchUseCase @Inject constructor(
     private val searchRepository: SearchRepository,
     @IODispatcher dispatcher: CoroutineDispatcher,
-) : UseCase<SearchParams, SearchUseCase.SearchSuccess, SearchUseCase.SearchErrors>(dispatcher) {
-    sealed class SearchSuccess {
-        data class BooksData(val books: Books) : SearchSuccess()
+) : UseCase<SearchParams, SearchUseCase.Success, SearchUseCase.Error>(dispatcher) {
+    sealed class Success {
+        data class BooksData(val books: Books) : Success()
     }
 
-    sealed class SearchErrors {
-        data object NoBooksFound : SearchErrors()
+    sealed class Error {
+        data object NoBooksFound : Error()
     }
 
-    override suspend fun execute(parameters: SearchParams): Result<SearchSuccess, SearchErrors> {
+    override suspend fun execute(parameters: SearchParams): Result<Success, Error> {
         val result = searchRepository.search(parameters)
 
         return when (result) {
@@ -30,9 +30,9 @@ internal class SearchUseCase @Inject constructor(
                 val books = result.data
 
                 if (books.items.isNotEmpty()) {
-                    Result.Success(SearchSuccess.BooksData(books))
+                    Result.Success(Success.BooksData(books))
                 } else {
-                    Result.BusinessRuleError(SearchErrors.NoBooksFound)
+                    Result.BusinessRuleError(Error.NoBooksFound)
                 }
             }
 
