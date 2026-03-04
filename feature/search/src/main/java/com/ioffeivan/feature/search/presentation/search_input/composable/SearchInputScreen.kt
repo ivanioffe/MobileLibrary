@@ -19,9 +19,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -80,6 +83,8 @@ internal fun SearchInputScreen(
     onEvent: (SearchInputEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val focusRequester = remember { FocusRequester() }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -114,13 +119,19 @@ internal fun SearchInputScreen(
             PrimarySearchBar(
                 query = state.query,
                 onQueryChange = {
+                    if (it.isEmpty()) {
+                        focusRequester.requestFocus()
+                    }
                     onEvent(SearchInputEvent.QueryChanged(it))
                 },
                 onSearch = { query ->
-                    if (query.isNotEmpty()) {
+                    if (query.isNotBlank()) {
                         onEvent(SearchInputEvent.SearchClick(query))
                     }
                 },
+                modifier =
+                    Modifier
+                        .focusRequester(focusRequester),
             )
 
             if (state.recentSearches.isNotEmpty()) {

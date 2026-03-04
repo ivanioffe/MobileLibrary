@@ -47,7 +47,7 @@ internal fun Header(
             IconButton(
                 onClick =
                     onDebounceClick {
-                        onBackClick
+                        onBackClick()
                     },
             ) {
                 PrimaryIcon(
@@ -78,8 +78,7 @@ private fun SearchQueryBar(
                 .clip(RoundedCornerShape(8.dp))
                 .background(Grey200)
                 .clickable(
-                    onClick =
-                        onDebounceClick { onClick() },
+                    onClick = onDebounceClick { onClick() },
                 ),
     ) {
         Row(
