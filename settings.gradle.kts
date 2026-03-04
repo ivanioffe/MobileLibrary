@@ -39,3 +39,4 @@ include(":core:screenshot-testing")
 include(":core:ui")
 
 include(":feature:sign-in")
+include(":feature:search")

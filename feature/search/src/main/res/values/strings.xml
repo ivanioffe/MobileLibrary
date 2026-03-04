@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_input_title">Поиск книг</string>
+    <string name="search_recent_label">Вы искали</string>
+    <string name="search_clear_all">Очистить</string>
+    <string name="search_no_results">Ничего не найдено</string>
+</resources>

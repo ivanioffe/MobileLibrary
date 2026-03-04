@@ -1,5 +1,6 @@
 package com.ioffeivan.core.domain.base
 
+import com.ioffeivan.core.common.error.mapToCommonError
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -19,8 +20,12 @@ abstract class UseCase<in Parameters, Success, BusinessRuleError>(
      * @return A [Result] containing either data, a business error, or a system error.
      */
     suspend operator fun invoke(parameters: Parameters): Result<Success, BusinessRuleError> {
-        return withContext(dispatcher) {
-            execute(parameters)
+        return try {
+            withContext(dispatcher) {
+                execute(parameters)
+            }
+        } catch (e: Exception) {
+            Result.Error(e.mapToCommonError())
         }
     }
 

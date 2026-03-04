@@ -4,29 +4,14 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-02-27T07:30:05.092813Z">
+        <DropdownSelection timestamp="2026-03-03T20:32:27.600216Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/ivanioffe/.android/avd/Pixel_5.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=CIIZ7XAMAUNN8T9X" />
             </handle>
           </Target>
         </DropdownSelection>
         <DialogSelection />
-      </SelectionState>
-      <SelectionState runConfigName="deleteRecentSearch_whenEntityDoesNotExist_shouldDoNothing()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="deleteAllRecentSearch_whenDataExists_shouldClearTable()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="deleteAllRecentSearch_whenNoData_shouldDoNothing()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="RecentSearchDaoTest">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="observeRecentSearches_whenDataExists_shouldReturnOrderedByTimestampDesc()">
-        <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
   </component>

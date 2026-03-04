@@ -23,4 +23,5 @@ android {
 dependencies {
     implementation(projects.core.datastoreUser)
     implementation(projects.core.model)
+    implementation(projects.core.network)
 }
