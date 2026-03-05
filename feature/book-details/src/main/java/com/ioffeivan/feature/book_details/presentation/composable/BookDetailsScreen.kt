@@ -45,6 +45,7 @@ import com.ioffeivan.core.ui.ObserveEffectsWithLifecycle
 import com.ioffeivan.core.ui.ShowSnackbar
 import com.ioffeivan.core.ui.UiText
 import com.ioffeivan.core.ui.onDebounceClick
+import com.ioffeivan.feature.book_details.R
 import com.ioffeivan.feature.book_details.domain.model.BookDetails
 import com.ioffeivan.feature.book_details.presentation.BookDetailsEffect
 import com.ioffeivan.feature.book_details.presentation.BookDetailsEvent
@@ -97,7 +98,7 @@ internal fun BookDetailsScreen(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "О книге",
+                        text = stringResource(R.string.about_book),
                         style = MaterialTheme.typography.titleMedium,
                     )
                 },

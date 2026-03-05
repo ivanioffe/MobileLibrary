@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.ioffeivan.android.library)
+    alias(libs.plugins.ioffeivan.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -21,5 +23,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.designsystem)
+
+    implementation(libs.androidx.hilt.navigation.compose)
+
     androidTestImplementation(libs.androidx.test.runner)
 }

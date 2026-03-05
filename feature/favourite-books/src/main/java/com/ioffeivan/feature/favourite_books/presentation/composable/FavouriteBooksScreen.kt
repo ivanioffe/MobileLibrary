@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -37,6 +38,7 @@ import com.ioffeivan.core.ui.ShowSnackbar
 import com.ioffeivan.core.ui.UiText
 import com.ioffeivan.core.ui.onDebounceClick
 import com.ioffeivan.core.ui.preview.BooksPreviewParameterProvider
+import com.ioffeivan.feature.favourite_books.R
 import com.ioffeivan.feature.favourite_books.presentation.FavouriteBooksEffect
 import com.ioffeivan.feature.favourite_books.presentation.FavouriteBooksEvent
 import com.ioffeivan.feature.favourite_books.presentation.FavouriteBooksState
@@ -92,7 +94,7 @@ internal fun FavouriteBooksScreen(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "Избранное",
+                        text = stringResource(R.string.favourite_books_title),
                         style = MaterialTheme.typography.titleMedium,
                     )
                 },
@@ -195,7 +197,7 @@ private fun SuccessState(
             },
             text = {
                 Text(
-                    text = "Вы уверены что хотите удалить книгу из Избранного? Это действие нельзя будет отменить",
+                    text = stringResource(R.string.favourite_books_remove_confirmation),
                 )
             },
             confirmButton = {
@@ -205,7 +207,7 @@ private fun SuccessState(
                             onRemoveConfirm(state.bookForRemoveId)
                         },
                 ) {
-                    Text(text = "Да")
+                    Text(text = stringResource(R.string.favourite_books_confirm_button))
                 }
             },
             dismissButton = {
@@ -215,7 +217,7 @@ private fun SuccessState(
                             onRemoveDismiss()
                         },
                 ) {
-                    Text(text = "Нет")
+                    Text(text = stringResource(R.string.favourite_books_dismiss_button))
                 }
             },
         )
@@ -235,7 +237,7 @@ private fun EmptyState() {
                 .fillMaxSize(),
     ) {
         Text(
-            text = "Вы пока не добавили ни одной книги",
+            text = stringResource(R.string.favourite_books_empty_state),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyLarge,
         )
