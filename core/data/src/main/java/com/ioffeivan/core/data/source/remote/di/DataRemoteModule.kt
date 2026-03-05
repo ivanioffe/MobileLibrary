@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal interface FavouriteBooksRemoteModule {
+internal interface DataRemoteModule {
     @Binds
     fun bindFavouriteBooksRemoteDataSource(
         impl: RetrofitFavouriteBooksRemoteDataSource,

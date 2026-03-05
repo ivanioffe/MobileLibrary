@@ -16,7 +16,7 @@ fun BookDto.toBook(): Book {
     return Book(
         id = id,
         title = bookInfoDto.title,
-        authors = bookInfoDto.authors,
+        authors = bookInfoDto.authors?.joinToString(),
         thumbnailUrl = getThumbnail(bookInfoDto.imageLinks),
         isFavourite = userInfoDto != null,
     )
