@@ -15,7 +15,7 @@ internal class FavouriteBooksReducer :
             is FavouriteBooksEvent.BookClicked -> {
                 ReducerResult(
                     state = previousState,
-                    effect = FavouriteBooksEffect.NavigateToBookDetails(event.id),
+                    effect = FavouriteBooksEffect.NavigateToBookDetails(event.bookId),
                 )
             }
 
@@ -140,7 +140,7 @@ internal data class FavouriteBooksState(
 internal sealed interface FavouriteBooksEvent : Reducer.UiEvent {
     data object BackClicked : FavouriteBooksEvent
 
-    data class BookClicked(val id: String) : FavouriteBooksEvent
+    data class BookClicked(val bookId: String) : FavouriteBooksEvent
 
     data class FavouriteClicked(val bookId: String) : FavouriteBooksEvent
 

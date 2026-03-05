@@ -9,8 +9,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.ioffeivan.core.ui.ShowSnackbar
+import com.ioffeivan.feature.book_details.presentation.navigation.bookDetails
+import com.ioffeivan.feature.favourite_books.presentation.navigation.FavouriteBooksRoute
 import com.ioffeivan.feature.favourite_books.presentation.navigation.favouriteBooks
-import com.ioffeivan.feature.search.presentation.navigation.SearchRoute
 import com.ioffeivan.feature.search.presentation.navigation.search
 import kotlinx.serialization.Serializable
 
@@ -24,9 +25,10 @@ fun NavGraphBuilder.authorized(
     onShowSnackbar: ShowSnackbar,
     onNavigateBack: () -> Unit,
     onNavigateToSearchResults: (String) -> Unit,
+    onNavigateToBookDetails: (String) -> Unit,
 ) {
     navigation<AuthorizedRoute>(
-        startDestination = SearchRoute,
+        startDestination = FavouriteBooksRoute,
     ) {
         composable<HomeRoute> {
             Box(
@@ -42,13 +44,18 @@ fun NavGraphBuilder.authorized(
         favouriteBooks(
             onShowSnackbar = onShowSnackbar,
             onNavigateBack = onNavigateBack,
-            onNavigateToBookDetails = {},
+            onNavigateToBookDetails = onNavigateToBookDetails,
         )
 
         search(
             onNavigateBack = onNavigateBack,
             onNavigateToSearchResults = onNavigateToSearchResults,
-            onNavigateToBookDetails = {},
+            onNavigateToBookDetails = onNavigateToBookDetails,
+        )
+
+        bookDetails(
+            onShowSnackbar = onShowSnackbar,
+            onNavigateBack = onNavigateBack,
         )
     }
 }

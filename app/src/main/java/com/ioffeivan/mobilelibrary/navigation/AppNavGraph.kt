@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.ioffeivan.core.ui.ShowSnackbar
+import com.ioffeivan.feature.book_details.presentation.navigation.navigateToBookDetails
 import com.ioffeivan.feature.search.presentation.search_results.navigation.navigateToSearchResults
 
 @Composable
@@ -29,6 +30,7 @@ fun AppNavGraph(
             onNavigateToSearchResults = {
                 navController.navigateToSearchResults(query = it)
             },
+            onNavigateToBookDetails = navController::navigateToBookDetails,
         )
     }
 }

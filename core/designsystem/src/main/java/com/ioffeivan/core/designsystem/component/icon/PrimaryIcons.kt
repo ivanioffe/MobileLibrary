@@ -7,5 +7,6 @@ object PrimaryIcons {
     val Close = R.drawable.ic_close
     val FilledFavourite = R.drawable.filled_favourite
     val Google = R.drawable.ic_google
+    val OutlinedFavourite = R.drawable.outlined_favourite
     val Search = R.drawable.ic_search
 }
