@@ -15,9 +15,10 @@ fun BooksDto.toBooks(): Books {
 fun BookDto.toBook(): Book {
     return Book(
         id = id,
-        title = bookInfo.title,
-        authors = bookInfo.authors,
-        thumbnailUrl = getThumbnail(bookInfo.imageLinks),
+        title = bookInfoDto.title,
+        authors = bookInfoDto.authors,
+        thumbnailUrl = getThumbnail(bookInfoDto.imageLinks),
+        isFavourite = userInfoDto != null,
     )
 }
 
