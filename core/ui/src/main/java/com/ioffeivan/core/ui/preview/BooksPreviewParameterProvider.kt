@@ -13,19 +13,19 @@ class BooksPreviewParameterProvider : PreviewParameterProvider<Books> {
                         Book(
                             id = "1",
                             title = "Название книги",
-                            authors = listOf("Автор И.О"),
+                            authors = "Автор И.О",
                             thumbnailUrl = "url",
                         ),
                         Book(
                             id = "2",
                             title = "Длинное название книги",
-                            authors = listOf("Автор И.О"),
+                            authors = "Автор И.О",
                             thumbnailUrl = "url",
                         ),
                         Book(
                             id = "3",
                             title = "Бумажная книга",
-                            authors = listOf("Автор Автор"),
+                            authors = "Автор Автор",
                             thumbnailUrl = "url",
                         ),
                     ),

@@ -8,6 +8,7 @@ data class BookDto(
     val id: String,
     @SerialName("volumeInfo")
     val bookInfoDto: BookInfoDto,
+    @SerialName("userInfo")
     val userInfoDto: UserInfoDto? = null,
 )
 

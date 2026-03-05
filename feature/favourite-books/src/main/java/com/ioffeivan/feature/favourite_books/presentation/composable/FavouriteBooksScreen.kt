@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,6 +29,7 @@ import com.ioffeivan.core.designsystem.component.icon.PrimaryIcon
 import com.ioffeivan.core.designsystem.component.icon.PrimaryIcons
 import com.ioffeivan.core.designsystem.preview.PreviewContainer
 import com.ioffeivan.core.model.Books
+import com.ioffeivan.core.ui.DimmerLoadingOverlayScreen
 import com.ioffeivan.core.ui.ErrorScreen
 import com.ioffeivan.core.ui.LoadingScreen
 import com.ioffeivan.core.ui.ObserveEffectsWithLifecycle
@@ -222,7 +222,7 @@ private fun SuccessState(
     }
 
     if (state.isBookRemoving) {
-        BookRemovingLoading()
+        DimmerLoadingOverlayScreen()
     }
 }
 
@@ -239,19 +239,6 @@ private fun EmptyState() {
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyLarge,
         )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun BookRemovingLoading(
-    modifier: Modifier = Modifier,
-) {
-    BasicAlertDialog(
-        onDismissRequest = {},
-        modifier = modifier,
-    ) {
-        LoadingScreen()
     }
 }
 

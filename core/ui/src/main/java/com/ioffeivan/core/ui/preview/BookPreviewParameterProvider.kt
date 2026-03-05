@@ -9,8 +9,8 @@ class BookPreviewParameterProvider : PreviewParameterProvider<Book> {
             sequenceOf(
                 Book(
                     id = "1",
-                    title = "Title",
-                    authors = listOf("Author1, Author2"),
+                    title = "Название книги",
+                    authors = "Автор И.О, Автор И.О",
                     thumbnailUrl = "url",
                 ),
             )

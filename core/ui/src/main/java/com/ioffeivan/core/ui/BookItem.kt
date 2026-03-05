@@ -65,9 +65,7 @@ fun BookItem(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text =
-                    book.authors?.joinToString(", ")
-                        ?: stringResource(R.string.author_not_specified),
+                text = book.authors ?: stringResource(R.string.author_not_specified),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style =

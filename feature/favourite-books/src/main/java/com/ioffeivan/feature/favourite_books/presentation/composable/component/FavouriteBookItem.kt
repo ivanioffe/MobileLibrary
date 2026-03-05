@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -29,6 +30,7 @@ import com.ioffeivan.core.designsystem.theme.Grey600
 import com.ioffeivan.core.model.Book
 import com.ioffeivan.core.ui.onDebounceClick
 import com.ioffeivan.core.ui.preview.BookPreviewParameterProvider
+import com.ioffeivan.core.ui.R as CoreUiR
 
 @Composable
 internal fun FavouriteBookItem(
@@ -91,7 +93,7 @@ internal fun FavouriteBookItem(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = book.authors?.joinToString(", ") ?: "Автор не указан",
+                text = book.authors ?: stringResource(CoreUiR.string.author_not_specified),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style =
