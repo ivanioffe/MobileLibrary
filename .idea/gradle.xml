@@ -39,6 +39,7 @@
             <option value="$PROJECT_DIR$/core/screenshot-testing" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/book-details" />
             <option value="$PROJECT_DIR$/feature/favourite-books" />
             <option value="$PROJECT_DIR$/feature/search" />
             <option value="$PROJECT_DIR$/feature/sign-in" />

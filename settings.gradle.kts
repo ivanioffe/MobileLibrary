@@ -38,6 +38,7 @@ include(":core:presentation")
 include(":core:screenshot-testing")
 include(":core:ui")
 
+include(":feature:book-details")
 include(":feature:favourite-books")
 include(":feature:sign-in")
 include(":feature:search")
