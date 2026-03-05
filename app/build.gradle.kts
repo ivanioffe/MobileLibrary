@@ -40,6 +40,7 @@ dependencies {
     implementation(projects.feature.search)
     implementation(projects.feature.signIn)
 
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.navigation.compose)
 }
