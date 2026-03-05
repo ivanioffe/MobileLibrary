@@ -34,6 +34,10 @@ dependencies {
     implementation(projects.core.designsystem)
     implementation(projects.core.ui)
 
+    implementation(projects.feature.bookDetails)
+    implementation(projects.feature.favouriteBooks)
+    implementation(projects.feature.home)
+    implementation(projects.feature.search)
     implementation(projects.feature.signIn)
 
     implementation(libs.androidx.core.ktx)

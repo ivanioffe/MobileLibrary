@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.ioffeivan.android.library)
     alias(libs.plugins.ioffeivan.compose)
+    alias(libs.plugins.ioffeivan.screenshotTesting)
 }
 
 android {
@@ -19,4 +20,11 @@ android {
             )
         }
     }
+}
+
+dependencies {
+    implementation(projects.core.designsystem)
+    implementation(projects.core.model)
+
+    implementation(libs.bundles.coil)
 }

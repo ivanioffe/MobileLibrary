@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favourite_books_title">Избранное</string>
+    <string name="favourite_books_remove_confirmation">Вы уверены, что хотите удалить книгу из Избранного? Это действие нельзя будет отменить</string>
+    <string name="favourite_books_confirm_button">Да</string>
+    <string name="favourite_books_dismiss_button">Нет</string>
+    <string name="favourite_books_empty_state">Вы пока не добавили ни одной книги</string>
+</resources>

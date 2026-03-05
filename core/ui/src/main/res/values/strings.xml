@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="retry">Повторить попытку</string>
+    <string name="author_not_specified">Автор не указан</string>
+</resources>
