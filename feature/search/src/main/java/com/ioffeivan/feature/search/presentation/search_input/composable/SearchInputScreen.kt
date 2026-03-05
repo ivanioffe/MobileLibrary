@@ -98,7 +98,7 @@ internal fun SearchInputScreen(
                     IconButton(
                         onClick =
                             onDebounceClick {
-                                onEvent(SearchInputEvent.BackClick)
+                                onEvent(SearchInputEvent.BackClicked)
                             },
                     ) {
                         PrimaryIcon(
@@ -126,7 +126,7 @@ internal fun SearchInputScreen(
                 },
                 onSearch = { query ->
                     if (query.isNotBlank()) {
-                        onEvent(SearchInputEvent.SearchClick(query))
+                        onEvent(SearchInputEvent.SearchClicked(query))
                     }
                 },
                 modifier =

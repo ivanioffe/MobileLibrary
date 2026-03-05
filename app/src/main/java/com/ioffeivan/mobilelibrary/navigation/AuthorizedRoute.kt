@@ -8,6 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.ioffeivan.core.ui.ShowSnackbar
+import com.ioffeivan.feature.favourite_books.presentation.navigation.favouriteBooks
 import com.ioffeivan.feature.search.presentation.navigation.SearchRoute
 import com.ioffeivan.feature.search.presentation.navigation.search
 import kotlinx.serialization.Serializable
@@ -19,6 +21,7 @@ data object AuthorizedRoute
 data object HomeRoute
 
 fun NavGraphBuilder.authorized(
+    onShowSnackbar: ShowSnackbar,
     onNavigateBack: () -> Unit,
     onNavigateToSearchResults: (String) -> Unit,
 ) {
@@ -35,6 +38,12 @@ fun NavGraphBuilder.authorized(
                 Text(text = "Home screen")
             }
         }
+
+        favouriteBooks(
+            onShowSnackbar = onShowSnackbar,
+            onNavigateBack = onNavigateBack,
+            onNavigateToBookDetails = {},
+        )
 
         search(
             onNavigateBack = onNavigateBack,

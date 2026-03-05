@@ -34,4 +34,6 @@ dependencies {
 
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.bundles.coil)
+
+    androidTestImplementation(libs.androidx.test.runner)
 }

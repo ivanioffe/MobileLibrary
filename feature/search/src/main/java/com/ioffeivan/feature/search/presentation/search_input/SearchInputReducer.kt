@@ -15,7 +15,7 @@ internal class SearchInputReducer : Reducer<SearchInputState, SearchInputEvent, 
                 )
             }
 
-            is SearchInputEvent.SearchClick -> {
+            is SearchInputEvent.SearchClicked -> {
                 ReducerResult(
                     state = previousState,
                     effect = SearchInputEffect.NavigateToSearchResults(event.query),
@@ -35,7 +35,7 @@ internal class SearchInputReducer : Reducer<SearchInputState, SearchInputEvent, 
                 )
             }
 
-            SearchInputEvent.BackClick -> {
+            SearchInputEvent.BackClicked -> {
                 ReducerResult(
                     state = previousState,
                     effect = SearchInputEffect.NavigateToBack,
@@ -68,7 +68,7 @@ internal data class SearchInputState(
 internal sealed interface SearchInputEvent : Reducer.UiEvent {
     data class QueryChanged(val query: String) : SearchInputEvent
 
-    data class SearchClick(val query: String) : SearchInputEvent
+    data class SearchClicked(val query: String) : SearchInputEvent
 
     data class RecentSearchClicked(val query: String) : SearchInputEvent
 
@@ -76,7 +76,7 @@ internal sealed interface SearchInputEvent : Reducer.UiEvent {
 
     data object RecentSearchesCleared : SearchInputEvent
 
-    data object BackClick : SearchInputEvent
+    data object BackClicked : SearchInputEvent
 
     data class RecentSearchesReceived(val recentSearches: List<String>) : SearchInputEvent
 }

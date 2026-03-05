@@ -1,6 +1,5 @@
 package com.ioffeivan.feature.search.presentation.search_results
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.viewModelScope
 import com.ioffeivan.core.domain.base.onBusinessRuleError
 import com.ioffeivan.core.domain.base.onError
@@ -26,30 +25,45 @@ internal class SearchResultsViewModel @AssistedInject constructor(
     ) {
     override fun onEvent(event: SearchResultsEvent) {
         sendEvent(event)
+
+        when (event) {
+            is SearchResultsEvent.RetryLoadClicked -> {
+                onRetryLoadClicked()
+            }
+
+            else -> {}
+        }
     }
 
-    @SuppressLint("ResourceType")
     override suspend fun initialDataLoad() {
+        search()
+    }
+
+    private fun onRetryLoadClicked() {
         viewModelScope.launch {
-            searchUseCase(SearchParams(query))
-                .onSuccess {
-                    when (it) {
-                        is SearchUseCase.Success.BooksData -> {
-                            sendEvent(SearchResultsEvent.BooksSuccessLoaded(it.books))
-                        }
+            search()
+        }
+    }
+
+    private suspend fun search() {
+        searchUseCase(SearchParams(query))
+            .onSuccess {
+                when (it) {
+                    is SearchUseCase.Success.BooksData -> {
+                        sendEvent(SearchResultsEvent.BooksSuccessLoaded(it.books))
                     }
                 }
-                .onBusinessRuleError {
-                    sendEvent(SearchResultsEvent.NoBooksFound)
-                }
-                .onError {
-                    sendEvent(
-                        SearchResultsEvent.BooksErrorLoaded(
-                            UiText.StringResource(it.asStringRes()),
-                        ),
-                    )
-                }
-        }
+            }
+            .onBusinessRuleError {
+                sendEvent(SearchResultsEvent.NoBooksFound)
+            }
+            .onError {
+                sendEvent(
+                    SearchResultsEvent.BooksErrorLoaded(
+                        UiText.StringResource(it.asStringRes()),
+                    ),
+                )
+            }
     }
 
     @AssistedFactory
