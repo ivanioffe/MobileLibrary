@@ -40,5 +40,6 @@ include(":core:ui")
 
 include(":feature:book-details")
 include(":feature:favourite-books")
+include(":feature:home")
 include(":feature:sign-in")
 include(":feature:search")
