@@ -1,5 +1,8 @@
 plugins {
     alias(libs.plugins.ioffeivan.android.library)
+    alias(libs.plugins.ioffeivan.compose)
+    alias(libs.plugins.ioffeivan.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -18,4 +21,16 @@ android {
             )
         }
     }
+}
+
+dependencies {
+    implementation(projects.core.common)
+    implementation(projects.core.designsystem)
+    implementation(projects.core.domain)
+    implementation(projects.core.network)
+    implementation(projects.core.presentation)
+    implementation(projects.core.ui)
+
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.bundles.coil)
 }
