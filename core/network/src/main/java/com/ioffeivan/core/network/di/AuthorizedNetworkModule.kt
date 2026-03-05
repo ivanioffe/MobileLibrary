@@ -1,6 +1,7 @@
 package com.ioffeivan.core.network.di
 
 import com.ioffeivan.core.datastore_auth.AuthManager
+import com.ioffeivan.core.network.api.FavouriteBooksApiService
 import com.ioffeivan.core.network.interceptor.AuthInterceptor
 import com.ioffeivan.core.network.utils.TokenAuthenticator
 import dagger.Module
@@ -11,6 +12,7 @@ import dagger.multibindings.IntoSet
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.create
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -54,6 +56,14 @@ internal object AuthorizedNetworkModule {
     @Authorized
     fun provideAuthInterceptor(authManager: AuthManager): Interceptor {
         return AuthInterceptor(authManager)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavouriteBooksApiService(
+        @Authorized retrofit: Retrofit,
+    ): FavouriteBooksApiService {
+        return retrofit.create()
     }
 }
 

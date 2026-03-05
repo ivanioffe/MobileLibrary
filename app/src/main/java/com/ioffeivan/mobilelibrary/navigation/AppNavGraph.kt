@@ -24,6 +24,7 @@ fun AppNavGraph(
         )
 
         authorized(
+            onShowSnackbar = onShowSnackbar,
             onNavigateBack = navController::popBackStack,
             onNavigateToSearchResults = {
                 navController.navigateToSearchResults(query = it)

@@ -12,13 +12,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.ioffeivan.core.designsystem.preview.PreviewContainer
 import com.ioffeivan.core.designsystem.theme.Grey600
 import com.ioffeivan.core.model.Book
+import com.ioffeivan.core.ui.preview.BookPreviewParameterProvider
 
 @Composable
 fun BookItem(
@@ -62,7 +65,9 @@ fun BookItem(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = book.authors?.joinToString(", ") ?: "Автор не указан",
+                text =
+                    book.authors?.joinToString(", ")
+                        ?: stringResource(R.string.author_not_specified),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style =
@@ -76,16 +81,13 @@ fun BookItem(
 
 @Preview
 @Composable
-private fun BookItemPreview() {
+private fun BookItemPreview(
+    @PreviewParameter(BookPreviewParameterProvider::class)
+    book: Book,
+) {
     PreviewContainer {
         BookItem(
-            book =
-                Book(
-                    id = "1",
-                    title = "Title",
-                    authors = listOf("Author1, Author2"),
-                    thumbnailUrl = "url",
-                ),
+            book = book,
             onClick = {},
             modifier = Modifier,
         )
@@ -94,33 +96,24 @@ private fun BookItemPreview() {
 
 @Preview
 @Composable
-private fun GridBookItemPreview() {
+private fun GridBookItemPreview(
+    @PreviewParameter(BookPreviewParameterProvider::class)
+    book: Book,
+) {
     PreviewContainer {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
         ) {
             item {
                 BookItem(
-                    book =
-                        Book(
-                            id = "1",
-                            title = "Title",
-                            authors = listOf("Author1, Author2"),
-                            thumbnailUrl = "url",
-                        ),
+                    book = book,
                     onClick = {},
                 )
             }
 
             item {
                 BookItem(
-                    book =
-                        Book(
-                            id = "1",
-                            title = "Title",
-                            authors = listOf("Author1, Author2"),
-                            thumbnailUrl = "url",
-                        ),
+                    book = book,
                     onClick = {},
                 )
             }

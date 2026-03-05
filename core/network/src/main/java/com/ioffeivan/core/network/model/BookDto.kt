@@ -7,14 +7,20 @@ import kotlinx.serialization.Serializable
 data class BookDto(
     val id: String,
     @SerialName("volumeInfo")
-    val bookInfo: BookInfo,
+    val bookInfoDto: BookInfoDto,
+    val userInfoDto: UserInfoDto? = null,
 )
 
 @Serializable
-data class BookInfo(
+data class BookInfoDto(
     val title: String,
     val authors: List<String>? = null,
     val imageLinks: ImageLinks? = null,
+)
+
+@Serializable
+data class UserInfoDto(
+    val updated: String,
 )
 
 @Serializable

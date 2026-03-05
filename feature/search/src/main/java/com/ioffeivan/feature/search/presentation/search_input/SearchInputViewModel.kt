@@ -28,7 +28,7 @@ internal class SearchInputViewModel @Inject constructor(
         sendEvent(event)
 
         when (event) {
-            is SearchInputEvent.SearchClick -> {
+            is SearchInputEvent.SearchClicked -> {
                 onSearchClick(event.query)
             }
 

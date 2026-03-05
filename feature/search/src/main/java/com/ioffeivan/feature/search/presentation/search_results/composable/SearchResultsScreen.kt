@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -26,6 +27,7 @@ import com.ioffeivan.core.ui.ErrorScreen
 import com.ioffeivan.core.ui.LoadingScreen
 import com.ioffeivan.core.ui.ObserveEffectsWithLifecycle
 import com.ioffeivan.core.ui.UiText
+import com.ioffeivan.core.ui.preview.BooksPreviewParameterProvider
 import com.ioffeivan.feature.search.R
 import com.ioffeivan.feature.search.presentation.search_results.SearchResultsEffect
 import com.ioffeivan.feature.search.presentation.search_results.SearchResultsEvent
@@ -77,8 +79,8 @@ internal fun SearchResultsScreen(
     ) {
         Header(
             query = state.query,
-            onBackClick = { onEvent(SearchResultsEvent.BackClick) },
-            onSearchQueryBarClick = { onEvent(SearchResultsEvent.BackClick) },
+            onBackClick = { onEvent(SearchResultsEvent.BackClicked) },
+            onSearchQueryBarClick = { onEvent(SearchResultsEvent.BackClicked) },
         )
 
         Box(
@@ -94,7 +96,7 @@ internal fun SearchResultsScreen(
                 state.errorMessage != null ->
                     ErrorScreen(
                         message = state.errorMessage.asString(),
-                        onRetry = { onEvent(SearchResultsEvent.RetryLoadClick) },
+                        onRetry = { onEvent(SearchResultsEvent.RetryLoadClicked) },
                     )
 
                 state.books.items.isEmpty() -> EmptyState()
@@ -102,7 +104,10 @@ internal fun SearchResultsScreen(
                 else ->
                     SuccessState(
                         books = state.books.items,
-                        onBookClick = { onEvent(SearchResultsEvent.BookClick(it)) },
+                        onBookClick = { onEvent(SearchResultsEvent.BookClicked(it)) },
+                        modifier =
+                            Modifier
+                                .fillMaxSize(),
                     )
             }
         }
@@ -152,35 +157,16 @@ private fun EmptyState() {
 
 @Preview
 @Composable
-private fun SearchResultsScreenStatePreview() {
+private fun SearchResultsScreenSuccessPreview(
+    @PreviewParameter(BooksPreviewParameterProvider::class)
+    books: Books,
+) {
     PreviewContainer {
         SearchResultsScreen(
             state =
                 SearchResultsState(
                     query = "Название",
-                    books =
-                        Books(
-                            listOf(
-                                Book(
-                                    id = "1",
-                                    title = "Название книги",
-                                    authors = listOf("Автор И.О"),
-                                    thumbnailUrl = "url",
-                                ),
-                                Book(
-                                    id = "2",
-                                    title = "Длинное название книги",
-                                    authors = listOf("Автор И.О"),
-                                    thumbnailUrl = "url",
-                                ),
-                                Book(
-                                    id = "3",
-                                    title = "Бумажная книга",
-                                    authors = listOf("Автор Автор"),
-                                    thumbnailUrl = "url",
-                                ),
-                            ),
-                        ),
+                    books = books,
                     isLoading = false,
                     errorMessage = null,
                 ),

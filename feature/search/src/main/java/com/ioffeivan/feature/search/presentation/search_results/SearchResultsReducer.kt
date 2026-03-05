@@ -12,20 +12,24 @@ internal class SearchResultsReducer :
         event: SearchResultsEvent,
     ): ReducerResult<SearchResultsState, SearchResultsEffect> {
         return when (event) {
-            is SearchResultsEvent.BookClick -> {
+            is SearchResultsEvent.BookClicked -> {
                 ReducerResult(
                     state = previousState,
                     effect = SearchResultsEffect.NavigateToBookDetails(event.id),
                 )
             }
 
-            SearchResultsEvent.RetryLoadClick -> {
+            SearchResultsEvent.RetryLoadClicked -> {
                 ReducerResult(
-                    state = previousState.copy(isLoading = true),
+                    state =
+                        previousState.copy(
+                            isLoading = true,
+                            errorMessage = null,
+                        ),
                 )
             }
 
-            SearchResultsEvent.BackClick -> {
+            SearchResultsEvent.BackClicked -> {
                 ReducerResult(
                     state = previousState,
                     effect = SearchResultsEffect.NavigateToBack,
@@ -84,11 +88,11 @@ internal data class SearchResultsState(
 }
 
 internal sealed interface SearchResultsEvent : Reducer.UiEvent {
-    data object BackClick : SearchResultsEvent
+    data object BackClicked : SearchResultsEvent
 
-    data class BookClick(val id: String) : SearchResultsEvent
+    data class BookClicked(val id: String) : SearchResultsEvent
 
-    data object RetryLoadClick : SearchResultsEvent
+    data object RetryLoadClicked : SearchResultsEvent
 
     data class BooksSuccessLoaded(val books: Books) : SearchResultsEvent
 

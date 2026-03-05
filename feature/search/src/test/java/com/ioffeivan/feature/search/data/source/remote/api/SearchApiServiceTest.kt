@@ -6,7 +6,7 @@ import com.ioffeivan.core.common.error.network.NetworkStatusCode
 import com.ioffeivan.core.common.result.DataResult
 import com.ioffeivan.core.network.call_adapter.factory.DataResultCallAdapterFactory
 import com.ioffeivan.core.network.model.BookDto
-import com.ioffeivan.core.network.model.BookInfo
+import com.ioffeivan.core.network.model.BookInfoDto
 import com.ioffeivan.core.network.model.BooksDto
 import com.ioffeivan.core.network.model.ErrorDetailsDto
 import com.ioffeivan.core.network.model.ErrorResponseDto
@@ -36,7 +36,7 @@ class SearchApiServiceTest {
     private val booksDto =
         BooksDto(
             listOf(
-                BookDto("id", BookInfo("title", emptyList(), ImageLinks("url", "url"))),
+                BookDto("id", BookInfoDto("title", emptyList(), ImageLinks("url", "url"))),
             ),
         )
 
