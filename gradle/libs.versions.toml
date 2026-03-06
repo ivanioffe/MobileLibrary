@@ -1,5 +1,5 @@
 [versions]
-mobileLibraryVersion = "0.3.0"
+mobileLibraryVersion = "0.3.1"
 
 activityCompose = "1.12.4"
 androidxCoreSplashscreen = "1.2.0"
