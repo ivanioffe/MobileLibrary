@@ -8,7 +8,9 @@ import com.ioffeivan.core.domain.usecase.RemoveBookFromFavouritesUseCase
 import com.ioffeivan.core.presentation.BaseViewModel
 import com.ioffeivan.core.presentation.asStringRes
 import com.ioffeivan.core.ui.UiText
+import com.ioffeivan.feature.book_details.domain.model.BookDetails
 import com.ioffeivan.feature.book_details.domain.usecase.GetBookDetailsUseCase
+import com.ioffeivan.feature.book_details.presentation.mapper.toBook
 import dagger.Lazy
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -35,10 +37,7 @@ internal class BookDetailsViewModel @AssistedInject constructor(
             }
 
             is BookDetailsEvent.FavouriteClicked -> {
-                onFavouriteClicked(
-                    bookId = event.bookId,
-                    isFavourite = event.isFavourite,
-                )
+                onFavouriteClicked(event.bookDetails)
             }
 
             else -> {}
@@ -69,9 +68,9 @@ internal class BookDetailsViewModel @AssistedInject constructor(
         }
     }
 
-    private fun onFavouriteClicked(bookId: String, isFavourite: Boolean) {
+    private fun onFavouriteClicked(bookDetails: BookDetails) {
         viewModelScope.launch {
-            if (isFavourite) {
+            if (bookDetails.isFavourite) {
                 removeBookFromFavouritesUseCase.get().invoke(bookId)
                     .onSuccess {
                         sendEvent(BookDetailsEvent.FavouriteToggleSuccess)
@@ -84,7 +83,7 @@ internal class BookDetailsViewModel @AssistedInject constructor(
                         )
                     }
             } else {
-                addBookToFavouritesUseCase.get().invoke(bookId)
+                addBookToFavouritesUseCase.get().invoke(bookDetails.toBook())
                     .onSuccess {
                         sendEvent(BookDetailsEvent.FavouriteToggleSuccess)
                     }

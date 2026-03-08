@@ -103,10 +103,7 @@ internal sealed interface BookDetailsEvent : Reducer.UiEvent {
 
     data object RetryLoadClicked : BookDetailsEvent
 
-    data class FavouriteClicked(
-        val bookId: String,
-        val isFavourite: Boolean,
-    ) : BookDetailsEvent
+    data class FavouriteClicked(val bookDetails: BookDetails) : BookDetailsEvent
 
     data class BookDetailsSuccessLoaded(val bookDetails: BookDetails) : BookDetailsEvent
 

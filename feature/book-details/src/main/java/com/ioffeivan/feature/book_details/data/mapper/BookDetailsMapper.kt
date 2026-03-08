@@ -11,11 +11,17 @@ internal fun BookDetailsDto.toBookDetails(): BookDetails {
         authors = bookDetailsInfoDto.authors?.joinToString(),
         description = bookDetailsInfoDto.description,
         imageUrl = getImage(bookDetailsInfoDto.imageLinks),
+        thumbnailUrl = getThumbnail(bookDetailsInfoDto.imageLinks),
         isFavourite = userInfoDto != null,
     )
 }
 
 private fun getImage(imageLinks: BookDetailsImageLinks?): String? {
-    return (imageLinks?.extraLarge ?: imageLinks?.large ?: imageLinks?.medium)
+    return (imageLinks?.medium ?: imageLinks?.small)
+        ?.replace("http", "https")
+}
+
+private fun getThumbnail(imageLinks: BookDetailsImageLinks?): String? {
+    return (imageLinks?.thumbnail ?: imageLinks?.smallThumbnail)
         ?.replace("http", "https")
 }
