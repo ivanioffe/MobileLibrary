@@ -1,20 +1,19 @@
-package com.ioffeivan.core.domain.usecase
+package com.ioffeivan.feature.favourite_books.domain.usecase
 
 import com.ioffeivan.core.common.coroutine.IODispatcher
 import com.ioffeivan.core.common.result.DataResult
 import com.ioffeivan.core.domain.base.Result
 import com.ioffeivan.core.domain.base.UseCase
 import com.ioffeivan.core.domain.repository.FavouriteBooksRepository
-import com.ioffeivan.core.model.Book
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
-class AddBookToFavouritesUseCase @Inject constructor(
+internal class RefreshFavouriteBooksUseCase @Inject constructor(
     private val favouriteBooksRepository: FavouriteBooksRepository,
     @IODispatcher dispatcher: CoroutineDispatcher,
-) : UseCase<Book, Unit, Nothing>(dispatcher) {
-    override suspend fun execute(parameters: Book): Result<Unit, Nothing> {
-        val result = favouriteBooksRepository.addBookToFavourites(parameters)
+) : UseCase<Unit, Unit, Nothing>(dispatcher) {
+    override suspend fun execute(parameters: Unit): Result<Unit, Nothing> {
+        val result = favouriteBooksRepository.refreshFavouriteBooks()
 
         return when (result) {
             is DataResult.Success -> {

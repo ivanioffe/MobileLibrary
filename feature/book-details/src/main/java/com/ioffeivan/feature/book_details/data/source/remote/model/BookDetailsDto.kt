@@ -23,6 +23,8 @@ data class BookDetailsInfoDto(
 
 @Serializable
 data class BookDetailsImageLinks(
+    val smallThumbnail: String?,
+    val thumbnail: String?,
     val small: String?,
     val medium: String?,
     val large: String?,

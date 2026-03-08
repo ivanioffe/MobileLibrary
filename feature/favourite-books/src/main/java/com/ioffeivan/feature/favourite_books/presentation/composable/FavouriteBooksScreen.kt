@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -14,6 +16,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -31,11 +34,8 @@ import com.ioffeivan.core.designsystem.component.icon.PrimaryIcons
 import com.ioffeivan.core.designsystem.preview.PreviewContainer
 import com.ioffeivan.core.model.Books
 import com.ioffeivan.core.ui.DimmerLoadingOverlayScreen
-import com.ioffeivan.core.ui.ErrorScreen
-import com.ioffeivan.core.ui.LoadingScreen
 import com.ioffeivan.core.ui.ObserveEffectsWithLifecycle
 import com.ioffeivan.core.ui.ShowSnackbar
-import com.ioffeivan.core.ui.UiText
 import com.ioffeivan.core.ui.onDebounceClick
 import com.ioffeivan.core.ui.preview.BooksPreviewParameterProvider
 import com.ioffeivan.feature.favourite_books.R
@@ -114,46 +114,42 @@ internal fun FavouriteBooksScreen(
         },
         modifier = modifier,
     ) { innerPadding ->
-        Box(
+        PullToRefreshBox(
+            isRefreshing = state.isRefreshing ?: true,
+            onRefresh = {
+                onEvent(FavouriteBooksEvent.RefreshClicked)
+            },
             contentAlignment = Alignment.Center,
             modifier =
-                modifier
-                    .fillMaxSize()
+                Modifier
                     .padding(innerPadding),
         ) {
-            when {
-                state.isLoading ->
-                    LoadingScreen()
-
-                state.errorMessage != null ->
-                    ErrorScreen(
-                        message = state.errorMessage.asString(),
-                        onRetry = {
-                            onEvent(FavouriteBooksEvent.RetryLoadClicked)
-                        },
-                    )
-
-                state.favouriteBooks.items.isEmpty() -> EmptyState()
-
-                else ->
-                    SuccessState(
-                        state = state,
-                        onBookClick = {
-                            onEvent(FavouriteBooksEvent.BookClicked(it))
-                        },
-                        onFavouriteClick = {
-                            onEvent(FavouriteBooksEvent.FavouriteClicked(it))
-                        },
-                        onRemoveConfirm = {
-                            onEvent(FavouriteBooksEvent.RemoveBookConfirmed(it))
-                        },
-                        onRemoveDismiss = {
-                            onEvent(FavouriteBooksEvent.RemoveBookDismissed)
-                        },
-                        modifier =
-                            Modifier
-                                .fillMaxSize(),
-                    )
+            if (state.favouriteBooks.isEmpty() && state.isRefreshing != null) {
+                EmptyState(
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState()),
+                )
+            } else {
+                SuccessState(
+                    state = state,
+                    onBookClick = {
+                        onEvent(FavouriteBooksEvent.BookClicked(it))
+                    },
+                    onFavouriteClick = {
+                        onEvent(FavouriteBooksEvent.FavouriteClicked(it))
+                    },
+                    onRemoveConfirm = {
+                        onEvent(FavouriteBooksEvent.RemoveBookConfirmed(it))
+                    },
+                    onRemoveDismiss = {
+                        onEvent(FavouriteBooksEvent.RemoveBookDismissed)
+                    },
+                    modifier =
+                        Modifier
+                            .fillMaxSize(),
+                )
             }
         }
     }
@@ -173,7 +169,7 @@ private fun SuccessState(
         modifier = modifier,
     ) {
         items(
-            items = state.favouriteBooks.items,
+            items = state.favouriteBooks,
             key = { it.id },
         ) { book ->
             FavouriteBookItem(
@@ -229,12 +225,12 @@ private fun SuccessState(
 }
 
 @Composable
-private fun EmptyState() {
+private fun EmptyState(
+    modifier: Modifier = Modifier,
+) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier =
-            Modifier
-                .fillMaxSize(),
+        modifier = modifier,
     ) {
         Text(
             text = stringResource(R.string.favourite_books_empty_state),
@@ -254,8 +250,8 @@ private fun FavouriteBooksScreenSuccessPreview(
         FavouriteBooksScreen(
             state =
                 FavouriteBooksState.initial().copy(
-                    favouriteBooks = books,
-                    isLoading = false,
+                    favouriteBooks = books.items,
+                    isRefreshing = false,
                 ),
             onEvent = {},
         )
@@ -272,8 +268,8 @@ private fun FavouriteBooksScreenSuccessWithDialogPreview(
         FavouriteBooksScreen(
             state =
                 FavouriteBooksState.initial().copy(
-                    favouriteBooks = books,
-                    isLoading = false,
+                    favouriteBooks = books.items,
+                    isRefreshing = false,
                     bookForRemoveId = "id",
                 ),
             onEvent = {},
@@ -291,8 +287,8 @@ private fun FavouriteBooksScreenSuccessIsBookRemovingPreview(
         FavouriteBooksScreen(
             state =
                 FavouriteBooksState.initial().copy(
-                    favouriteBooks = books,
-                    isLoading = false,
+                    favouriteBooks = books.items,
+                    isRefreshing = false,
                     bookForRemoveId = "",
                     isBookRemoving = true,
                 ),
@@ -303,13 +299,13 @@ private fun FavouriteBooksScreenSuccessIsBookRemovingPreview(
 
 @Preview
 @Composable
-private fun FavouriteBooksScreenLoadingPreview() {
+private fun FavouriteBooksScreenRefreshingPreview() {
     PreviewContainer {
         FavouriteBooksScreen(
             state =
                 FavouriteBooksState.initial()
                     .copy(
-                        isLoading = true,
+                        isRefreshing = true,
                     ),
             onEvent = {},
         )
@@ -324,24 +320,8 @@ private fun FavouriteBooksScreenEmptyPreview() {
             state =
                 FavouriteBooksState.initial()
                     .copy(
-                        favouriteBooks = Books(listOf()),
-                        isLoading = false,
-                    ),
-            onEvent = {},
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun FavouriteBooksScreenErrorPreview() {
-    PreviewContainer {
-        FavouriteBooksScreen(
-            state =
-                FavouriteBooksState.initial()
-                    .copy(
-                        isLoading = false,
-                        errorMessage = UiText.StaticString("Нет подключения к Интернету"),
+                        favouriteBooks = listOf(),
+                        isRefreshing = false,
                     ),
             onEvent = {},
         )

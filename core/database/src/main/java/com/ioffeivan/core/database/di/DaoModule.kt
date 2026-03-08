@@ -1,6 +1,7 @@
 package com.ioffeivan.core.database.di
 
 import com.ioffeivan.core.database.AppDatabase
+import com.ioffeivan.core.database.dao.FavouriteBookDao
 import com.ioffeivan.core.database.dao.RecentSearchDao
 import dagger.Module
 import dagger.Provides
@@ -14,4 +15,9 @@ internal object DaoModule {
     fun provideRecentSearchDao(
         database: AppDatabase,
     ): RecentSearchDao = database.recentSearchDao()
+
+    @Provides
+    fun provideFavouriteBookDao(
+        database: AppDatabase,
+    ): FavouriteBookDao = database.favouriteBookDao()
 }
