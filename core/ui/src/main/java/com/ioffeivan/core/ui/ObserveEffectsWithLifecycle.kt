@@ -8,6 +8,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.withContext
 
 /**
@@ -31,7 +32,7 @@ fun <T> ObserveEffectsWithLifecycle(
     LaunchedEffect(effects, lifecycleOwner.lifecycle) {
         lifecycleOwner.repeatOnLifecycle(state = minActiveState) {
             withContext(Dispatchers.Main.immediate) {
-                effects.collect(onEffect)
+                effects.collectLatest(onEffect)
             }
         }
     }

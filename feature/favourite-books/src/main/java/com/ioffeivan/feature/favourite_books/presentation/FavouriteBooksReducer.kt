@@ -1,6 +1,6 @@
 package com.ioffeivan.feature.favourite_books.presentation
 
-import com.ioffeivan.core.model.Books
+import com.ioffeivan.core.model.Book
 import com.ioffeivan.core.presentation.Reducer
 import com.ioffeivan.core.presentation.ReducerResult
 import com.ioffeivan.core.ui.UiText
@@ -47,12 +47,11 @@ internal class FavouriteBooksReducer :
                 )
             }
 
-            FavouriteBooksEvent.RetryLoadClicked -> {
+            FavouriteBooksEvent.RefreshClicked -> {
                 ReducerResult(
                     state =
                         previousState.copy(
-                            isLoading = true,
-                            errorMessage = null,
+                            isRefreshing = true,
                         ),
                 )
             }
@@ -61,18 +60,7 @@ internal class FavouriteBooksReducer :
                 ReducerResult(
                     state =
                         previousState.copy(
-                            favouriteBooks = event.favouriteBooks,
-                            isLoading = false,
-                        ),
-                )
-            }
-
-            is FavouriteBooksEvent.FavouriteBooksErrorLoaded -> {
-                ReducerResult(
-                    state =
-                        previousState.copy(
-                            errorMessage = event.errorMessage,
-                            isLoading = false,
+                            favouriteBooks = event.books,
                         ),
                 )
             }
@@ -81,9 +69,45 @@ internal class FavouriteBooksReducer :
                 ReducerResult(
                     state =
                         previousState.copy(
-                            favouriteBooks = Books(listOf()),
-                            isLoading = false,
+                            favouriteBooks = listOf(),
                         ),
+                )
+            }
+
+            FavouriteBooksEvent.InitialRefreshSuccess -> {
+                ReducerResult(
+                    state =
+                        previousState.copy(
+                            isRefreshing = false,
+                        ),
+                )
+            }
+
+            FavouriteBooksEvent.InitialRefreshError -> {
+                ReducerResult(
+                    state =
+                        previousState.copy(
+                            isRefreshing = false,
+                        ),
+                )
+            }
+
+            FavouriteBooksEvent.RefreshSuccess -> {
+                ReducerResult(
+                    state =
+                        previousState.copy(
+                            isRefreshing = false,
+                        ),
+                )
+            }
+
+            is FavouriteBooksEvent.RefreshError -> {
+                ReducerResult(
+                    state =
+                        previousState.copy(
+                            isRefreshing = false,
+                        ),
+                    effect = FavouriteBooksEffect.ShowError(event.errorMessage),
                 )
             }
 
@@ -91,12 +115,6 @@ internal class FavouriteBooksReducer :
                 ReducerResult(
                     state =
                         previousState.copy(
-                            favouriteBooks =
-                                previousState.favouriteBooks.copy(
-                                    previousState.favouriteBooks.items.filter {
-                                        it.id != previousState.bookForRemoveId
-                                    },
-                                ),
                             bookForRemoveId = null,
                             isBookRemoving = false,
                         ),
@@ -118,18 +136,16 @@ internal class FavouriteBooksReducer :
 }
 
 internal data class FavouriteBooksState(
-    val favouriteBooks: Books,
-    val isLoading: Boolean,
-    val errorMessage: UiText?,
+    val favouriteBooks: List<Book>,
+    val isRefreshing: Boolean?,
     val bookForRemoveId: String?,
     val isBookRemoving: Boolean,
 ) : Reducer.UiState {
     companion object {
         fun initial(): FavouriteBooksState {
             return FavouriteBooksState(
-                favouriteBooks = Books(listOf()),
-                isLoading = true,
-                errorMessage = null,
+                favouriteBooks = listOf(),
+                isRefreshing = null, // null - Initial refresh
                 bookForRemoveId = null,
                 isBookRemoving = false,
             )
@@ -148,13 +164,19 @@ internal sealed interface FavouriteBooksEvent : Reducer.UiEvent {
 
     data object RemoveBookDismissed : FavouriteBooksEvent
 
-    data object RetryLoadClicked : FavouriteBooksEvent
+    data object RefreshClicked : FavouriteBooksEvent
 
-    data class FavouriteBooksSuccessLoaded(val favouriteBooks: Books) : FavouriteBooksEvent
+    data class FavouriteBooksSuccessLoaded(val books: List<Book>) : FavouriteBooksEvent
 
     data object NoFavouriteBooks : FavouriteBooksEvent
 
-    data class FavouriteBooksErrorLoaded(val errorMessage: UiText) : FavouriteBooksEvent
+    data object InitialRefreshSuccess : FavouriteBooksEvent
+
+    data object InitialRefreshError : FavouriteBooksEvent
+
+    data object RefreshSuccess : FavouriteBooksEvent
+
+    data class RefreshError(val errorMessage: UiText) : FavouriteBooksEvent
 
     data object BookSuccessRemoved : FavouriteBooksEvent
 
