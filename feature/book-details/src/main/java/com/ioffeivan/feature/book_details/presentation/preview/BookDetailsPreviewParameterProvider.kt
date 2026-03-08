@@ -11,6 +11,7 @@ internal class BookDetailsPreviewParameterProvider : PreviewParameterProvider<Bo
                 title = "Длинное название книги",
                 authors = "Автор И.О, Автор И.О",
                 description = "Описание описание описание. Описание описание описание описание описание описаниеописание описание.",
+                thumbnailUrl = "url",
                 imageUrl = "url",
                 isFavourite = false,
             ),

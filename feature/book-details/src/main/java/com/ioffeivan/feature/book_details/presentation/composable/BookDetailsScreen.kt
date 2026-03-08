@@ -135,9 +135,9 @@ internal fun BookDetailsScreen(
                 else ->
                     SuccessState(
                         state = state,
-                        onFavouriteClick = { bookId, isFavourite ->
+                        onFavouriteClick = { bookDetails ->
                             onEvent(
-                                BookDetailsEvent.FavouriteClicked(bookId, isFavourite),
+                                BookDetailsEvent.FavouriteClicked(bookDetails),
                             )
                         },
                     )
@@ -149,7 +149,7 @@ internal fun BookDetailsScreen(
 @Composable
 private fun SuccessState(
     state: BookDetailsState,
-    onFavouriteClick: (String, Boolean) -> Unit,
+    onFavouriteClick: (BookDetails) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     BookDetailsUi(
@@ -166,7 +166,7 @@ private fun SuccessState(
 @Composable
 private fun BookDetailsUi(
     bookDetails: BookDetails,
-    onFavouriteClick: (String, Boolean) -> Unit,
+    onFavouriteClick: (BookDetails) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -217,10 +217,7 @@ private fun BookDetailsUi(
                 IconButton(
                     onClick =
                         onDebounceClick {
-                            onFavouriteClick(
-                                bookDetails.id,
-                                bookDetails.isFavourite,
-                            )
+                            onFavouriteClick(bookDetails)
                         },
                 ) {
                     PrimaryIcon(

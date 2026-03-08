@@ -5,6 +5,7 @@ internal data class BookDetails(
     val title: String,
     val authors: String?,
     val description: String?,
+    val thumbnailUrl: String?,
     val imageUrl: String?,
     val isFavourite: Boolean,
 ) {
@@ -15,6 +16,7 @@ internal data class BookDetails(
                 title = "",
                 authors = null,
                 description = null,
+                thumbnailUrl = null,
                 imageUrl = null,
                 isFavourite = false,
             )
