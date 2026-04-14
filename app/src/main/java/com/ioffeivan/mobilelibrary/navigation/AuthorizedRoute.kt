@@ -15,8 +15,8 @@ data object AuthorizedRoute
 
 fun NavGraphBuilder.authorized(
     onShowSnackbar: ShowSnackbar,
-    onFavouriteClick: () -> Unit,
-    onSearchClick: () -> Unit,
+    onNavigateToFavouriteBooks: () -> Unit,
+    onNavigateToSearch: () -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateToSearchResults: (String) -> Unit,
     onNavigateToBookDetails: (String) -> Unit,
@@ -25,8 +25,9 @@ fun NavGraphBuilder.authorized(
         startDestination = HomeRoute,
     ) {
         home(
-            onFavouriteClick = onFavouriteClick,
-            onSearchClick = onSearchClick,
+            onNavigateToFavouriteBooks = onNavigateToFavouriteBooks,
+            onNavigateToSearch = onNavigateToSearch,
+            onNavigateToBookDetails = onNavigateToBookDetails,
         )
 
         favouriteBooks(
