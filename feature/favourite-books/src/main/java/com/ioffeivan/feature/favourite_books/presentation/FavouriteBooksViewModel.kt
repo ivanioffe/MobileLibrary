@@ -17,8 +17,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// Как держать Snackbar на нескольких экранах
-// Переделать на PullToRefresh и убрать isLoading и (удалять напрямую без Dialog)?
 @HiltViewModel
 internal class FavouriteBooksViewModel @Inject constructor(
     private val observeFavouriteBooksUseCase: ObserveFavouriteBooksUseCase,
