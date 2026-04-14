@@ -28,12 +28,10 @@ fun AppNavGraph(
 
         authorized(
             onShowSnackbar = onShowSnackbar,
-            onFavouriteClick = navController::navigateToFavouriteBooks,
-            onSearchClick = navController::navigateToSearch,
+            onNavigateToFavouriteBooks = navController::navigateToFavouriteBooks,
+            onNavigateToSearch = navController::navigateToSearch,
             onNavigateBack = navController::popBackStack,
-            onNavigateToSearchResults = {
-                navController.navigateToSearchResults(query = it)
-            },
+            onNavigateToSearchResults = navController::navigateToSearchResults,
             onNavigateToBookDetails = navController::navigateToBookDetails,
         )
     }

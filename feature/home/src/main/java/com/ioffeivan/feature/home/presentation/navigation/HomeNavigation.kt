@@ -4,7 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.ioffeivan.feature.home.presentation.composable.HomeScreen
+import com.ioffeivan.feature.home.presentation.composable.HomeRoute
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -14,13 +14,15 @@ fun NavController.navigateToHome(navOptions: NavOptions? = null) =
     navigate(HomeRoute, navOptions)
 
 fun NavGraphBuilder.home(
-    onFavouriteClick: () -> Unit,
-    onSearchClick: () -> Unit,
+    onNavigateToFavouriteBooks: () -> Unit,
+    onNavigateToSearch: () -> Unit,
+    onNavigateToBookDetails: (String) -> Unit,
 ) {
     composable<HomeRoute> {
-        HomeScreen(
-            onFavouriteClick = onFavouriteClick,
-            onSearchClick = onSearchClick,
+        HomeRoute(
+            onNavigateToFavouriteBooks = onNavigateToFavouriteBooks,
+            onNavigateToSearch = onNavigateToSearch,
+            onNavigateToBookDetails = onNavigateToBookDetails,
         )
     }
 }
