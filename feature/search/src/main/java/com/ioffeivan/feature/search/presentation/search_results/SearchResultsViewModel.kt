@@ -55,7 +55,11 @@ internal class SearchResultsViewModel @AssistedInject constructor(
                 }
             }
             .onBusinessRuleError {
-                sendEvent(SearchResultsEvent.NoBooksFound)
+                when (it) {
+                    SearchUseCase.Error.NoBooksFound -> {
+                        sendEvent(SearchResultsEvent.NoBooksFound)
+                    }
+                }
             }
             .onError {
                 sendEvent(
